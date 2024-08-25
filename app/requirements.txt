@@ -1,0 +1,9 @@
+
+fastapi
+uvicorn[standard]
+celery[redis]
+redis
+sqlalchemy
+alembic
+psycopg2-binary
+        
