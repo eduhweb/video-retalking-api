@@ -1,7 +1,3 @@
-Here is a detailed README in English for your "Video Processing API" project using FastAPI, Celery, and Docker:
-
----
-
 # Video Processing API
 
 ## Description
@@ -158,7 +154,3 @@ Contributions are welcome! If you want to help improve this project, follow thes
 ## License
 
 This project is licensed under the terms of the MIT license. See the `LICENSE` file for more details.
-
----
-
-This README provides a comprehensive overview of the project, including installation instructions, usage, API endpoints, and contribution guidelines. Be sure to customize the sections as needed, especially the URLs and any specific instructions that may apply to your environment or additional configurations required by the project.
