@@ -1,6 +1,3 @@
-Aqui está o conteúdo do arquivo `README.md` criado para o projeto:
-
-```markdown
 # VideoReTalking API Project
 
 ## Overview
