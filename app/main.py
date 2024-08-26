@@ -1,15 +1,10 @@
-
 from fastapi import FastAPI
-from .routers import video_processing
-from .database import SessionLocal
+from app.api.endpoints import upload
 
 app = FastAPI()
 
-app.include_router(video_processing.router)
+app.include_router(upload.router, prefix="/api/v1")
 
-@app.on_event("shutdown")
-def shutdown_event():
-    # Close database connections properly on shutdown
-    db = SessionLocal()
-    db.close()
-        
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

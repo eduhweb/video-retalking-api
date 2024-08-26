@@ -1,38 +1,34 @@
-
-version: '3.8'
+version: '3.7'
 
 services:
-  api:
-    build: ./app
+  web:
+    build: .
+    command: /bin/bash -c "source activate video_retalking && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
-    environment:
-      CELERY_BROKER_URL: "redis://redis:6379/0"
-      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
-      DATABASE_URL: "sqlite:///./test.db"
-    volumes:
-      - ./app/processed_videos:/app/processed_videos
     depends_on:
       - redis
+      - celery_worker
 
   redis:
     image: "redis:alpine"
     ports:
       - "6379:6379"
-    volumes:
-      - redis-data:/data
 
-  worker:
-    build: ./app
-    command: celery -A celery_config.celery_app worker --loglevel=info
-    environment:
-      CELERY_BROKER_URL: "redis://redis:6379/0"
-      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+  celery_worker:
+    build: .
+    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app worker --loglevel=info"
     volumes:
-      - ./app/processed_videos:/app/processed_videos
+      - .:/app
     depends_on:
       - redis
 
-volumes:
-  redis-data:
-    
+  celery_beat:
+    build: .
+    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
