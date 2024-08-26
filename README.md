@@ -105,31 +105,6 @@ Retrieve the processed video file.
 }
 ```
 
-## File Structure
-
-```plaintext
-video-retalking/
-├── app/
-│   ├── api/
-│   │   ├── endpoints/
-│   │   │   └── upload.py
-│   ├── core/
-│   │   ├── config.py
-│   │   └── celery_app.py
-│   ├── services/
-│   │   ├── video_processing.py
-│   ├── utils/
-│   │   └── file_utils.py
-│   ├── main.py
-├── worker/
-│   ├── tasks.py
-├── video-retalking/  # Cloned repository from https://github.com/chenxwh/video-retalking
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-└── README.md
-```
-
 ## Development
 
 For development, you can make changes to the source files and restart the Docker containers to see the changes in action.
