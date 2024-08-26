@@ -3,4 +3,4 @@ uvicorn
 celery
 redis
 pydantic
-django-celery-beat==2.2.0
+django-celery-beat

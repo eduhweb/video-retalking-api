@@ -6,8 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app  # Mount the project directory for hot reload
-      - ./uploads:/app/uploads  # Mount the uploads directory
+      - .:/app  # Monta o diretório do projeto para hot reload
+      - ./uploads:/app/uploads  # Monta o diretório de uploads
+      - ./logs:/app/logs  # Monta o diretório de logs com permissões corretas
     ports:
       - "8000:8000"
     depends_on:
@@ -25,8 +26,8 @@ services:
       dockerfile: Dockerfile
     command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app worker --loglevel=info"
     volumes:
-      - .:/app  # Mount the project directory for code updates
-      - ./uploads:/app/uploads  # Mount the uploads directory
+      - .:/app  # Monta o diretório do projeto para atualizações de código
+      - ./uploads:/app/uploads  # Monta o diretório de uploads
     depends_on:
       - redis
 
@@ -34,10 +35,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info"
     volumes:
-      - .:/app  # Mount the project directory for code updates
-      - ./uploads:/app/uploads  # Mount the uploads directory
-      - ./celerybeat-schedule:/app/celerybeat-schedule  # Mount the directory for Celery Beat schedule
+      - .:/app  # Monta o diretório do projeto para atualizações de código
+      - ./uploads:/app/uploads  # Monta o diretório de uploads
+      - ./celerybeat-schedule:/app/celerybeat-schedule  # Monta o diretório para o agendador do Celery Beat
     depends_on:
       - redis
