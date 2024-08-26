@@ -1,0 +1,65 @@
+# Ignore arquivos e diretórios de ambiente virtual
+env/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Ignore arquivos de configuração de ambiente
+*.env
+.env.local
+.env.*.local
+
+# Ignore diretórios de uploads temporários
+uploads/
+
+# Ignore diretórios de logs
+logs/
+*.log
+
+# Ignore resultados de compilação e caches
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignore arquivos de pacotes do sistema operacional
+*.deb
+*.rpm
+*.pkg
+*.dmg
+
+# Ignore arquivos de pacotes do Python
+*.whl
+
+# Ignore arquivos temporários gerados por editores
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore arquivos de configurações específicas do IDE
+.vscode/
+.idea/
+
+# Ignore arquivos do Docker
+docker-compose.override.yml
+Dockerfile.*
+
+# Ignore arquivos de checkpoints do Jupyter Notebook
+.ipynb_checkpoints/
+
+# Ignore arquivos de lock (opcional, dependendo do gerenciador de pacotes que você usa)
+poetry.lock
+Pipfile.lock
+yarn.lock
+package-lock.json
+
+# Ignore arquivos de cache
+.cache/
+
+# Ignore arquivos de agendamento do Celery Beat
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir

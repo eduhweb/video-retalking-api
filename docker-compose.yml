@@ -2,10 +2,11 @@ version: '3.7'
 
 services:
   web:
-    build: .
-    command: /bin/bash -c "source activate video_retalking && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - .:/app  # Monta o diretório do projeto para permitir hot reload
     ports:
       - "8000:8000"
     depends_on:
@@ -18,17 +19,21 @@ services:
       - "6379:6379"
 
   celery_worker:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app worker --loglevel=info"
     volumes:
-      - .:/app
+      - .:/app  # Monta o diretório do projeto para que o código seja atualizado no worker
     depends_on:
       - redis
 
   celery_beat:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info"
     volumes:
-      - .:/app
+      - .:/app  # Monta o diretório do projeto para que o código seja atualizado no beat
     depends_on:
       - redis

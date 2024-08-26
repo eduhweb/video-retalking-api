@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     CELERY_BROKER_URL: str = "redis://redis:6379/0"
