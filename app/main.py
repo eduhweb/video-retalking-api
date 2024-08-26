@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from app.utils.file_utils import setup_logging
 
