@@ -6,7 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app  # Monta o diretório do projeto para permitir hot reload
+      - .:/app  # Mount the project directory for hot reload
+      - ./uploads:/app/uploads  # Mount the uploads directory
     ports:
       - "8000:8000"
     depends_on:
@@ -24,7 +25,8 @@ services:
       dockerfile: Dockerfile
     command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app worker --loglevel=info"
     volumes:
-      - .:/app  # Monta o diretório do projeto para que o código seja atualizado no worker
+      - .:/app  # Mount the project directory for code updates
+      - ./uploads:/app/uploads  # Mount the uploads directory
     depends_on:
       - redis
 
@@ -32,8 +34,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info"
+    command: /bin/bash -c "source activate video_retalking && celery -A app.core.celery_app beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     volumes:
-      - .:/app  # Monta o diretório do projeto para que o código seja atualizado no beat
+      - .:/app  # Mount the project directory for code updates
+      - ./uploads:/app/uploads  # Mount the uploads directory
+      - ./celerybeat-schedule:/app/celerybeat-schedule  # Mount the directory for Celery Beat schedule
     depends_on:
       - redis
