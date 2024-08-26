@@ -149,6 +149,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an Issue for any bugs, feature requests, or improvements.
-```
-
-Este README fornece uma visão geral do projeto, descreve as principais tecnologias utilizadas, fornece instruções de instalação, detalha a estrutura dos arquivos e documenta os endpoints da API. Ele também inclui seções para desenvolvimento, licença, agradecimentos e contribuições.
